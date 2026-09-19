@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Document {
+  id         String   @id @default(uuid())
+  filename   String
+  content    String   @db.Text
+  chunkCount Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  chunks     Chunk[]
+
+  @@map("documents")
+}
+
+model Chunk {
+  id         String   @id
+  documentId String   @map("document_id")
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  text       String   @db.Text
+  chunkIndex Int      @map("chunk_index")
+  startChar  Int      @map("start_char")
+  endChar    Int      @map("end_char")
+  metadata   Json?
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@index([documentId])
+  @@map("chunks")
+}
+
+model EvalLog {
+  id              String   @id @default(uuid())
+  query           String   @db.Text
+  expectedAnswer  String?  @map("expected_answer") @db.Text
+  generatedAnswer String   @map("generated_answer") @db.Text
+  retrievedChunks Json     @map("retrieved_chunks")
+  faithfulness    Float?
+  precision       Float?
+  recall          Float?
+  relevance       Float?
+  durationMs      Int?     @map("duration_ms")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@map("eval_logs")
+}
+
+model Conversation {
+  id         String   @id @default(uuid())
+  query      String   @db.Text
+  answer     String   @db.Text
+  citations  Json?
+  steps      Json?
+  retryCount Int      @default(0) @map("retry_count")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("conversations")
+}
