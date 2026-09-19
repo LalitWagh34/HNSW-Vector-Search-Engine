@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+__pycache__/
+*.pyc
+benchmarks/results/*.csv
+benchmarks/results/*.png
+*.zip
