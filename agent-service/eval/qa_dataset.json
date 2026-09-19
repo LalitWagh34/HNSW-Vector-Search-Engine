@@ -1,0 +1,58 @@
+[
+  {
+    "id": "qa_01",
+    "query": "How does HNSW achieve sub-millisecond search latency?",
+    "expected_answer": "HNSW achieves sub-millisecond search by organizing vectors into hierarchical layers where upper layers skip large graph regions with greedy hill-climbing, narrowing down candidates before searching layer 0.",
+    "category": "direct_technical",
+    "expected_keywords": ["hierarchical", "layers", "greedy", "layer 0", "graph"]
+  },
+  {
+    "id": "qa_02",
+    "query": "What is the formula and purpose of Reciprocal Rank Fusion (RRF)?",
+    "expected_answer": "RRF combines rankings from different retrieval models by summing 1 / (k + rank) across dense and sparse systems, setting k=60 as standard.",
+    "category": "direct_technical",
+    "expected_keywords": ["rrf", "rank", "dense", "sparse", "fusion"]
+  },
+  {
+    "id": "qa_03",
+    "query": "Why use BM25 alongside dense vector search?",
+    "expected_answer": "BM25 catches exact keyword matches, domain codes, and proper nouns that semantic embeddings can miss, providing complementary sparse retrieval.",
+    "category": "direct_technical",
+    "expected_keywords": ["bm25", "keyword", "exact", "sparse", "embeddings"]
+  },
+  {
+    "id": "qa_04",
+    "query": "Explain the role of efSearch and how tuning it affects recall versus speed.",
+    "expected_answer": "efSearch controls the size of the dynamic candidate list during query time; higher efSearch explores more neighbors improving recall at the cost of higher latency.",
+    "category": "direct_technical",
+    "expected_keywords": ["efsearch", "recall", "latency", "candidate", "tradeoff"]
+  },
+  {
+    "id": "qa_05",
+    "query": "Tell me about the history of Mars rover missions in the 1990s.",
+    "expected_answer": "I am sorry, but the provided documents do not contain sufficient information to answer your question.",
+    "category": "out_of_scope",
+    "expected_keywords": ["insufficient", "sorry", "not contain"]
+  },
+  {
+    "id": "qa_06",
+    "query": "How does the LangGraph self-check node protect against AI hallucinations?",
+    "expected_answer": "The self-check node validates that factual assertions in the generated answer are grounded in the retrieved chunks, routing back to reformulation or admitting uncertainty if not grounded.",
+    "category": "agent_architecture",
+    "expected_keywords": ["self-check", "grounded", "hallucination", "chunks"]
+  },
+  {
+    "id": "qa_07",
+    "query": "What prevents infinite loops when an agent repeatedly reformulates queries?",
+    "expected_answer": "A bounded retry counter stops query reformulation after reaching max_retries, triggering a safe fallback response.",
+    "category": "agent_architecture",
+    "expected_keywords": ["bounded", "retry", "counter", "max_retries", "fallback"]
+  },
+  {
+    "id": "qa_08",
+    "query": "What are the stock prices of Apple and Microsoft yesterday?",
+    "expected_answer": "I am sorry, but the provided documents do not contain sufficient information to answer your question.",
+    "category": "out_of_scope",
+    "expected_keywords": ["insufficient", "sorry", "not contain"]
+  }
+]
